@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriNova | Motor Selection</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  .motor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .motor-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+  }
+
+  .motor-card h3 {
+    color: var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .motor-card h3 i {
+    color: var(--green-dark);
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 14px;
+    background: var(--bg);
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .form-group input:focus {
+    border-color: var(--green);
+    background: var(--white);
+  }
+
+  .btn-calc {
+    background: var(--green-dark);
+    color: var(--white);
+    border: none;
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+  }
+
+  .btn-calc:hover {
+    background: #123f2b;
+  }
+
+  .result-box {
+    background: var(--green-soft);
+    border: 1px solid var(--green-accent);
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .result-item {
+    font-size: 15px;
+    color: var(--ink);
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .result-item:last-child {
+    border-bottom: none;
+  }
+
+  @media(max-width: 850px) {
+    .motor-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Agri<span>Nova</span></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="weather.html">Live Weather</a></li>
+    <li><a href="motor.html" class="active">Motor Selection</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="schemes.html">Govt Schemes</a></li>
+    <li><a href="calculator.html">Farm Calculator</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="section-heading">
+    <span>PUMP MATCHING ENGINE</span>
+    <h2>Smart <strong>Motor Selection</strong></h2>
+    <p>Enter your farm size, water demand, and budget to get the ideal motor power and brand recommendation.</p>
+  </div>
+
+  <div class="motor-container">
+
+    <!-- Input Form Card -->
+    <div class="motor-card">
+      <h3><i class="fa-solid fa-sliders"></i> Enter Farm Details</h3>
+
+      <div class="form-group">
+        <label>Farm Area (Acres)</label>
+        <input type="number" id="area" placeholder="Example: 4">
+      </div>
+
+      <div class="form-group">
+        <label>Water Required (Liters/Day)</label>
+        <input type="number" id="water" placeholder="Example: 9000">
+      </div>
+
+      <div class="form-group">
+        <label>Budget (₹)</label>
+        <input type="number" id="budget" placeholder="Example: 30000">
+      </div>
+
+      <button class="btn-calc" onclick="recommendMotor()">Recommend Motor</button>
+    </div>
+
+    <!-- Recommendation Output Card -->
+    <div class="motor-card">
+      <h3><i class="fa-solid fa-gears"></i> Motor Recommendation</h3>
+
+      <div class="result-box">
+        <div class="result-item" id="motor">🚜 <b>Recommended Motor :</b> -</div>
+        <div class="result-item" id="price">💰 <b>Estimated Price :</b> -</div>
+        <div class="result-item" id="brand">🏭 <b>Recommended Brand :</b> -</div>
+        <div class="result-item" id="status">✅ <b>Budget Status :</b> -</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h2><i class="fa-solid fa-seedling"></i> AgriNova</h2>
+      <p>Smart technology for a smarter and more sustainable future in agriculture.</p>
+    </div>
+    <div><p>© 2026 AgriNova. Smart Agriculture Platform.</p></div>
+  </div>
+</footer>
+
+<script>
+function recommendMotor() {
+  let area = Number(document.getElementById("area").value);
+  let water = Number(document.getElementById("water").value);
+  let budget = Number(document.getElementById("budget").value);
+
+  let motor;
+  let price;
+  let brand;
+
+  // Motor Recommendation
+  if (area <= 2 && water <= 5000) {
+    motor = "1 HP";
+    price = 15000;
+    brand = "CRI";
+  } else if (area <= 5 && water <= 10000) {
+    motor = "2 HP";
+    price = 25000;
+    brand = "Kirloskar";
+  } else if (area <= 8 && water <= 20000) {
+    motor = "3 HP";
+    price = 40000;
+    brand = "Texmo";
+  } else {
+    motor = "5 HP";
+    price = 60000;
+    brand = "Crompton";
+  }
+
+  // Display Recommendation
+  document.getElementById("motor").innerHTML = "🚜 <b>Recommended Motor :</b> " + motor;
+  document.getElementById("price").innerHTML = "💰 <b>Estimated Price :</b> ₹" + price.toLocaleString();
+  document.getElementById("brand").innerHTML = "🏭 <b>Recommended Brand :</b> " + brand;
+
+  // Budget Check
+  if (budget >= price) {
+    document.getElementById("status").innerHTML = "✅ <b>Budget Status :</b> Fits within your budget";
+  } else {
+    let extra = price - budget;
+    document.getElementById("status").innerHTML = "❌ <b>Budget Status :</b> Not within your budget.<br>You need ₹" + extra.toLocaleString() + " more.";
+  }
+}
+</script>
+
+  <script src="language.js"></script>
+</body>
+</html>

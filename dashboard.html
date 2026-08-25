@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriNova — Smart Agriculture Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html"><span>Agri</span>Nova</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+  <ul id="navMenu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="weather.html">Live Weather</a></li>
+    <li><a href="motor.html">Motor Selection</a></li>
+    <li><a class="active" href="dashboard.html">Dashboard</a></li>
+    <li><a href="schemes.html">Govt Schemes</a></li>
+    <li><a href="calculator.html">Farm Calculator</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section class="page-head">
+    <div>
+      <div class="tag"><i class="fa-solid fa-microchip"></i> SMART FARM DASHBOARD</div>
+      <h1>Farm <span>Dashboard</span></h1>
+      <p>Simple monitoring and irrigation control for your farm.</p>
+    </div>
+    <div class="connection" id="connection">
+      <span class="connection-dot"></span>
+      <div><small>DEVICE</small><strong id="connectionText">Connecting...</strong></div>
+    </div>
+  </section>
+
+  <section class="sensor-grid">
+    <article class="sensor-card">
+      <div class="sensor-icon"><i class="fa-solid fa-droplet"></i></div>
+      <div><span class="label">Soil Moisture</span><strong class="sensor-value" id="soilMoisture">--<small>%</small></strong><span class="sensor-note" id="moistureState">Waiting for sensor</span></div>
+      <div class="moisture-bar"><span id="moistureBar"></span></div>
+    </article>
+    <article class="sensor-card">
+      <div class="sensor-icon"><i class="fa-solid fa-temperature-half"></i></div>
+      <div><span class="label">Temperature</span><strong class="sensor-value" id="temperature">--<small>°C</small></strong><span class="sensor-note">DHT11 temperature</span></div>
+    </article>
+    <article class="sensor-card">
+      <div class="sensor-icon"><i class="fa-solid fa-wind"></i></div>
+      <div><span class="label">Humidity</span><strong class="sensor-value" id="humidity">--<small>%</small></strong><span class="sensor-note">DHT11 humidity</span></div>
+    </article>
+    <article class="sensor-card motor-card">
+      <div class="sensor-icon"><i class="fa-solid fa-power-off"></i></div>
+      <div><span class="label">Motor Status</span><div class="motor-status"><i id="motorIndicator"></i><strong id="motorStatus">OFF</strong></div><span class="sensor-note" id="motorSource">Waiting for controller</span></div>
+    </article>
+  </section>
+
+  <section class="main-grid">
+    <article class="panel control-panel">
+      <div class="panel-head"><div><span>IRRIGATION</span><h2>Motor Control</h2></div><i class="fa-solid fa-sliders"></i></div>
+
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="auto"><i class="fa-solid fa-wand-magic-sparkles"></i>AUTO</button>
+        <button class="mode-btn" data-mode="manual"><i class="fa-solid fa-hand"></i>MANUAL</button>
+      </div>
+
+      <div id="autoSection">
+        <div class="section-row"><strong>Moisture Threshold</strong><b><span id="thresholdDisplay">40</span>%</b></div>
+        <p class="small-text">Motor turns ON below this level and OFF at or above it.</p>
+        <input id="thresholdInput" class="range" type="range" min="10" max="90" value="40">
+        <button class="green-btn" id="saveThreshold"><i class="fa-solid fa-check"></i> Save Threshold</button>
+      </div>
+
+      <div id="manualSection" class="hidden">
+        <p class="small-text">Control the motor manually from the buttons below.</p>
+        <div class="manual-buttons">
+          <button class="motor-on" id="motorOn"><i class="fa-solid fa-power-off"></i> Turn ON</button>
+          <button class="motor-off" id="motorOff"><i class="fa-solid fa-stop"></i> Turn OFF</button>
+        </div>
+      </div>
+
+      <div class="timer-section">
+        <div class="timer-head"><div><span>IRRIGATION TIMER</span><h3>Daily Schedule</h3></div><label class="toggle"><input id="timerEnabled" type="checkbox"><span></span></label></div>
+        <div class="time-fields">
+          <label>START<input id="startTime" type="time"></label>
+          <label>OFF<input id="offTime" type="time"></label>
+        </div>
+        <p id="timerNote">Timer disabled</p>
+        <button class="light-btn" id="saveTimer"><i class="fa-solid fa-clock"></i> Save Timer</button>
+      </div>
+    </article>
+
+    <aside class="side-column">
+      <article class="panel status-panel">
+        <div class="panel-head"><div><span>LIVE STATUS</span><h2>Farm Status</h2></div><i class="fa-solid fa-leaf"></i></div>
+        <div class="status-list">
+          <div><span>Mode</span><strong id="modeStatus">AUTO</strong></div>
+          <div><span>Threshold</span><strong id="statusThreshold">40%</strong></div>
+          <div><span>Timer</span><strong id="timerStatus">OFF</strong></div>
+          <div><span>Motor</span><strong id="statusMotor">OFF</strong></div>
+        </div>
+        <div class="logic" id="logicBanner"><i class="fa-solid fa-circle-info"></i><span>Waiting for live soil moisture data.</span></div>
+      </article>
+
+      <div class="info-grid">
+        <article class="panel info-card">
+          <div class="info-head"><strong>Weather</strong><i class="fa-solid fa-cloud-sun"></i></div>
+          <strong class="weather-temp" id="weatherTemp">--°C</strong>
+          <p id="weatherText">Weather data pending</p>
+          <div class="info-meta"><span><i class="fa-solid fa-location-dot"></i> <b id="weatherLocation">Farm</b></span><span><i class="fa-solid fa-droplet"></i> <b id="weatherHumidity">--%</b></span></div>
+        </article>
+
+        <article class="panel info-card">
+          <div class="info-head"><strong>Farm Alerts</strong><i class="fa-solid fa-bell"></i></div>
+          <div id="alertsList" class="alerts"><div class="alert neutral"><i class="fa-solid fa-circle-info"></i><span>Waiting for sensor data.</span></div></div>
+        </article>
+      </div>
+    </aside>
+  </section>
+
+  <div class="simple-note"><i class="fa-solid fa-circle-check"></i><span>Your dashboard is ready for ESP32 + Firebase sensor data.</span></div>
+</main>
+
+<footer>
+  <div><h2>AgriNova</h2><p>Smart technology for smarter and more sustainable agriculture.</p></div>
+  <p>© 2026 AgriNova</p>
+</footer>
+
+<script src="dashboard.js"></script>
+  <script src="language.js"></script>
+</body>
+</html>

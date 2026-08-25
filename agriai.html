@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriAI | AgriNova</title>
+    <link rel="stylesheet" href="agriai.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">Agri<span>Nova</span></div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="weather.html">Live Weather</a>
+        <a href="motor.html">Motor</a>
+        <a href="irrigation.html">Irrigation</a>
+        <a href="schemes.html">Schemes</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="agriai.html" class="active">AgriAI</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+</header>
+
+<main class="ai-page">
+<section class="ai-container">
+    <div class="ai-header">
+        <div class="ai-title">
+            <div class="ai-icon">🤖</div>
+            <div><h1>AgriAI</h1><p>Your Smart Agriculture Assistant</p></div>
+        </div>
+        <button class="clear-btn" id="clearChat">🗑 Clear Chat</button>
+    </div>
+
+    <div class="demo-notice"><span>●</span> AgriAI Demo Mode — Responses are generated locally.</div>
+
+    <div class="chat-box" id="chatBox">
+        <div class="message ai-message">
+            <div class="avatar">🌱</div>
+            <div class="message-content">
+                <div class="sender">AgriAI</div>
+                <div class="bubble">
+                    Hello! 👋 I'm <strong>AgriAI</strong>, your smart agriculture assistant.
+                    <br><br>
+                    Ask me about soil moisture, irrigation, crops, weather, fertilizer,
+                    motors, ESP32, or the AgriNova dashboard.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-section">
+        <p>Quick Questions</p>
+        <div class="quick-buttons">
+            <button class="quick-btn" data-question="What should I do if soil moisture is low?">🌱 Soil Moisture</button>
+            <button class="quick-btn" data-question="How does automatic irrigation work?">💧 Irrigation</button>
+            <button class="quick-btn" data-question="Which crops are suitable for my farm?">🌾 Crops</button>
+            <button class="quick-btn" data-question="How does weather affect irrigation?">☀️ Weather</button>
+            <button class="quick-btn" data-question="When should fertilizer be applied?">🧪 Fertilizer</button>
+            <button class="quick-btn" data-question="My motor is not working. What should I check?">⚙️ Motor</button>
+            <button class="quick-btn" data-question="What is ESP32 used for in AgriNova?">🔌 ESP32</button>
+            <button class="quick-btn" data-question="What can I monitor in the AgriNova dashboard?">📊 Dashboard</button>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Ask AgriAI about your farm..." autocomplete="off">
+        <button id="sendBtn" class="send-btn">Send ➤</button>
+    </div>
+</section>
+</main>
+
+<script src="agriai.js"></script>
+  <script src="language.js"></script>
+</body>
+</html>

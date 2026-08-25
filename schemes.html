@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriNova | Government Schemes</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  .schemes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+  }
+
+  .scheme-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .scheme-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .scheme-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .scheme-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--green-soft);
+    color: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .scheme-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .scheme-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .btn-scheme {
+    background: var(--green-dark);
+    color: var(--white);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+    width: fit-content;
+  }
+
+  .btn-scheme:hover {
+    background: #123f2b;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Agri<span>Nova</span></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="weather.html">Live Weather</a></li>
+    <li><a href="motor.html">Motor Selection</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="schemes.html" class="active">Govt Schemes</a></li>
+    <li><a href="calculator.html">Farm Calculator</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="section-heading">
+    <span>NATIONAL INITIATIVES</span>
+    <h2>Government <strong>Agri Schemes</strong></h2>
+    <p>Explore agriculture subsidies, credit support, and crop insurance programs across India.</p>
+  </div>
+
+  <div class="schemes-grid">
+
+    <!-- PM-KISAN -->
+    <div class="scheme-card">
+      <div>
+        <div class="scheme-header">
+          <div class="scheme-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+          <h3>PM-KISAN</h3>
+        </div>
+        <p>Provides eligible farmers with direct income support of ₹6,000 per year in three equal installments.</p>
+      </div>
+      <button class="btn-scheme" onclick="window.open('https://pmkisan.gov.in')">
+        Learn More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    </div>
+
+    <!-- PM Fasal Bima Yojana -->
+    <div class="scheme-card">
+      <div>
+        <div class="scheme-header">
+          <div class="scheme-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>PM Fasal Bima Yojana</h3>
+        </div>
+        <p>Comprehensive crop insurance scheme protecting farmers against losses caused by natural disasters, pests, and diseases.</p>
+      </div>
+      <button class="btn-scheme" onclick="window.open('https://pmfby.gov.in')">
+        Learn More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    </div>
+
+    <!-- PM Krishi Sinchayee Yojana -->
+    <div class="scheme-card">
+      <div>
+        <div class="scheme-header">
+          <div class="scheme-icon"><i class="fa-solid fa-faucet-drip"></i></div>
+          <h3>PM Krishi Sinchayee Yojana</h3>
+        </div>
+        <p>Promotes micro-irrigation systems, efficient water usage, and farm water management infrastructure.</p>
+      </div>
+      <button class="btn-scheme" onclick="window.open('https://pmksy.gov.in')">
+        Learn More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    </div>
+
+    <!-- Soil Health Card -->
+    <div class="scheme-card">
+      <div>
+        <div class="scheme-header">
+          <div class="scheme-icon"><i class="fa-solid fa-vial-circle-check"></i></div>
+          <h3>Soil Health Card</h3>
+        </div>
+        <p>Provides soil nutrient reports and customized fertilizer dosage recommendations to maximize productivity.</p>
+      </div>
+      <button class="btn-scheme" onclick="window.open('https://soilhealth.dac.gov.in')">
+        Learn More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    </div>
+
+    <!-- e-NAM -->
+    <div class="scheme-card">
+      <div>
+        <div class="scheme-header">
+          <div class="scheme-icon"><i class="fa-solid fa-store"></i></div>
+          <h3>e-NAM Platform</h3>
+        </div>
+        <p>Pan-India electronic trading portal connecting existing APMC mandis to create a unified national market for agricultural commodities.</p>
+      </div>
+      <button class="btn-scheme" onclick="window.open('https://enam.gov.in')">
+        Learn More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    </div>
+
+    <!-- Kisan Credit Card (KCC) -->
+    <div class="scheme-card">
+      <div>
+        <div class="scheme-header">
+          <div class="scheme-icon"><i class="fa-solid fa-credit-card"></i></div>
+          <h3>Kisan Credit Card (KCC)</h3>
+        </div>
+        <p>Delivers timely short-term credit support for cultivation, equipment purchase, and post-harvest maintenance at concessional interest rates.</p>
+      </div>
+      <button class="btn-scheme" onclick="window.open('https://www.myscheme.gov.in')">
+        Learn More <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h2><i class="fa-solid fa-seedling"></i> AgriNova</h2>
+      <p>Smart technology for a smarter and more sustainable future in agriculture.</p>
+    </div>
+    <div><p>© 2026 AgriNova. Smart Agriculture Platform.</p></div>
+  </div>
+</footer>
+
+  <script src="language.js"></script>
+</body>
+</html>

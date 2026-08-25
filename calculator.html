@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriNova | Farm Calculator</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  .calc-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .calc-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .calc-card h3 {
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .calc-card h3 i {
+    color: var(--green-dark);
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 13px;
+    background: var(--bg);
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .form-group input:focus {
+    border-color: var(--green);
+    background: var(--white);
+  }
+
+  .btn-calc {
+    background: var(--green-dark);
+    color: var(--white);
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+  }
+
+  .btn-calc:hover {
+    background: #123f2b;
+  }
+
+  .result-box {
+    margin-top: 20px;
+    background: var(--green-soft);
+    border: 1px solid var(--green-accent);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  @media(max-width: 980px) {
+    .calc-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">Agri<span>Nova</span></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="weather.html">Live Weather</a></li>
+    <li><a href="motor.html">Motor Selection</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="schemes.html">Govt Schemes</a></li>
+    <li><a href="calculator.html" class="active">Farm Calculator</a></li>
+
+  </ul>
+</nav>
+
+<main>
+  <div class="section-heading">
+    <span>FINANCIAL & RESOURCE ESTIMATION</span>
+    <h2>Smart <strong>Farm Calculators</strong></h2>
+    <p>Calculate precise water requirements, total operational expenses, and projected net profits.</p>
+  </div>
+
+  <div class="calc-container">
+
+    <!-- Water Calculator -->
+    <div class="calc-card">
+      <div>
+        <h3><i class="fa-solid fa-droplet"></i> Water Requirement</h3>
+        
+        <div class="form-group">
+          <label>Farm Area (Acres)</label>
+          <input type="number" id="area" placeholder="Enter acres">
+        </div>
+
+        <div class="form-group">
+          <label>Water Required Per Acre (Liters)</label>
+          <input type="number" id="water" placeholder="Liters per acre">
+        </div>
+      </div>
+
+      <div>
+        <button class="btn-calc" onclick="waterCalc()">Calculate Water</button>
+        <div class="result-box" id="waterResult">
+          Waiting for calculation...
+        </div>
+      </div>
+    </div>
+
+    <!-- Expense Calculator -->
+    <div class="calc-card">
+      <div>
+        <h3><i class="fa-solid fa-receipt"></i> Farm Expenses</h3>
+        
+        <div class="form-group">
+          <label>Seed Cost (₹)</label>
+          <input type="number" id="seed" placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label>Fertilizer Cost (₹)</label>
+          <input type="number" id="fert" placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label>Labour Cost (₹)</label>
+          <input type="number" id="labour" placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label>Electricity Cost (₹)</label>
+          <input type="number" id="electric" placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label>Other Expenses (₹)</label>
+          <input type="number" id="other" placeholder="0">
+        </div>
+      </div>
+
+      <div>
+        <button class="btn-calc" onclick="expenseCalc()">Calculate Expense</button>
+        <div class="result-box" id="expenseResult">
+          Waiting for calculation...
+        </div>
+      </div>
+    </div>
+
+    <!-- Profit Calculator -->
+    <div class="calc-card">
+      <div>
+        <h3><i class="fa-solid fa-chart-line"></i> Profit Calculator</h3>
+        
+        <div class="form-group">
+          <label>Total Income (₹)</label>
+          <input type="number" id="income" placeholder="Total earnings">
+        </div>
+
+        <div class="form-group">
+          <label>Total Expense (₹)</label>
+          <input type="number" id="expense" placeholder="Total cost">
+        </div>
+      </div>
+
+      <div>
+        <button class="btn-calc" onclick="profitCalc()">Calculate Profit</button>
+        <div class="result-box" id="profitResult">
+          Waiting for calculation...
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h2><i class="fa-solid fa-seedling"></i> AgriNova</h2>
+      <p>Smart technology for a smarter and more sustainable future in agriculture.</p>
+    </div>
+    <div><p>© 2026 AgriNova. Smart Agriculture Platform.</p></div>
+  </div>
+</footer>
+
+<script>
+// Water Calculator
+function waterCalc(){
+  let area = Number(document.getElementById("area").value);
+  let water = Number(document.getElementById("water").value);
+
+  if(area == 0 || water == 0){
+    document.getElementById("waterResult").innerHTML = "⚠️ Please enter all values.";
+    return;
+  }
+
+  let total = area * water;
+  document.getElementById("waterResult").innerHTML = 
+    "Total Water Required: <b>" + total.toLocaleString() + " Liters</b>";
+}
+
+// Expense Calculator
+function expenseCalc(){
+  let seed = Number(document.getElementById("seed").value);
+  let fert = Number(document.getElementById("fert").value);
+  let labour = Number(document.getElementById("labour").value);
+  let electric = Number(document.getElementById("electric").value);
+  let other = Number(document.getElementById("other").value);
+
+  let total = seed + fert + labour + electric + other;
+  document.getElementById("expenseResult").innerHTML = 
+    "Total Farm Expense: <b>₹" + total.toLocaleString() + "</b>";
+}
+
+// Profit Calculator
+function profitCalc(){
+  let income = Number(document.getElementById("income").value);
+  let expense = Number(document.getElementById("expense").value);
+
+  if(income == 0 || expense == 0){
+    document.getElementById("profitResult").innerHTML = "⚠️ Please enter all values.";
+    return;
+  }
+
+  let profit = income - expense;
+  if(profit >= 0){
+    document.getElementById("profitResult").innerHTML = 
+      "📈 Net Profit: <b style='color:#1e8e3e;'>₹" + profit.toLocaleString() + "</b><br>✅ Status: <b>PROFIT</b>";
+  }
+  else{
+    document.getElementById("profitResult").innerHTML = 
+      "📉 Net Loss: <b style='color:#d93025;'>₹" + Math.abs(profit).toLocaleString() + "</b><br>❌ Status: <b>LOSS</b>";
+  }
+}
+</script>
+
+  <script src="language.js"></script>
+</body>
+</html>
